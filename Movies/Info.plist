@@ -53,6 +53,12 @@
                 <key>NSExceptionAllowsInsecureHTTPLoads</key><true/>
                 <key>NSExceptionRequiresForwardSecrecy</key><false/>
             </dict>
+            <key>ia.media-imdb.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key><true/>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key><true/>
+                <key>NSExceptionRequiresForwardSecrecy</key><false/>
+            </dict>
         </dict>
     </dict>
 </dict>

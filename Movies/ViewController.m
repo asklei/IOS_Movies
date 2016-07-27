@@ -13,6 +13,7 @@
 @interface ViewController ()
 @property(nonatomic, weak) UISearchBar *search;
 @property(nonatomic, weak) UITextView *content;
+@property(nonatomic, weak) UIImageView *image;
 @property(nonatomic, strong) Movie* movie;
 @end
 
@@ -24,11 +25,13 @@
     
     UISearchBar *search = [UISearchBar new];
     UITextView *content = [UITextView new];
+    UIImageView *image = [UIImageView new];
     self.search = search;
     self.content = content;
+    self.image = image;
     [self.view addSubview:search];
     [self.view addSubview:content];
-    
+    [self.view addSubview:image];
     
     search.placeholder = @"search";
     search.searchBarStyle = UISearchBarStyleMinimal;
@@ -36,6 +39,7 @@
     content.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0] CGColor];
     content.layer.cornerRadius = 5.0f;
     content.layer.borderWidth = 0.5f;
+    image.layer.cornerRadius = 5.0f;
     
     self.search.delegate = self;
     self.movie = [Movie new];
@@ -53,8 +57,18 @@
         make.top.equalTo(self.search.mas_bottom).offset(spaceD*2);
         make.leading.equalTo(self.search.mas_leading);
         make.trailing.equalTo(self.search.mas_trailing);
+        make.bottom.equalTo(self.image.mas_top).offset(-spaceD*2);
+    }];
+    
+    [image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.greaterThanOrEqualTo(self.content.mas_height);
+        make.leading.equalTo(self.search.mas_leading);
+        make.trailing.equalTo(self.search.mas_trailing);
         make.bottom.equalTo(self.view.mas_bottom).offset(-spaceD*2);
     }];
+    
+    [self.content sizeToFit];
+    [self.image sizeToFit];
     
 }
 
@@ -84,6 +98,10 @@
                                                                              attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}]];
     self.content.attributedText = attributedString;
     NSLog(@"updated");
+}
+
+-(void)receivedPosterImage:(UIImage *)posterImage {
+    [self.image setImage:posterImage];
 }
 
 @end

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class UIImage;
 
 @protocol MovieDelegate
 @optional
 -(void) updated;
+-(void)receivedPosterImage:(UIImage *)posterImage;
 @end
 
 @interface Movie : NSObject
@@ -19,4 +21,5 @@
 @property(strong, nonatomic) NSString *plot;
 @property(weak, nonatomic) id<MovieDelegate> delegate;
 - (void)searchMovie:(NSString*)movie;
+-(void)downloadMoviePoster:(NSString *)posterURL;
 @end
