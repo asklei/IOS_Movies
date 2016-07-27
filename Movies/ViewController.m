@@ -8,10 +8,12 @@
 
 #import "ViewController.h"
 #import "Masonry.h"
+#import "Movie.h"
 
 @interface ViewController ()
 @property(nonatomic, weak) UISearchBar *search;
 @property(nonatomic, weak) UITextView *content;
+@property(nonatomic, strong) Movie* movie;
 @end
 
 @implementation ViewController
@@ -36,6 +38,7 @@
     content.layer.borderWidth = 0.5f;
     
     self.search.delegate = self;
+    self.movie = [Movie new];
     
     int spaceD = 10;
     
@@ -66,10 +69,7 @@
 # pragma mark: UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
-}
-
-- (void)doSearch {
-    
+    [self.movie searchMovie:searchBar.text];
 }
 
 @end
