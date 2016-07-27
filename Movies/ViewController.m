@@ -39,6 +39,7 @@
     
     self.search.delegate = self;
     self.movie = [Movie new];
+    self.movie.delegate = self;
     
     int spaceD = 10;
     
@@ -70,6 +71,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     [self.movie searchMovie:searchBar.text];
+}
+
+# pragma mark: MovieDelegate
+- (void) updated {
+    NSLog(@"updated");
 }
 
 @end

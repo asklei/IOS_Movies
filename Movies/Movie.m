@@ -17,6 +17,6 @@
 }
 
 - (void)searchMovie:(NSString*)movie {
-    
+    [self.delegate updated];
 }
 @end
