@@ -75,6 +75,14 @@
 
 # pragma mark: MovieDelegate
 - (void) updated {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+    [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \n", self.movie.title]
+                                                                             attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:20]}]];
+    [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \n", self.movie.actors]
+                                                                             attributes:@{NSFontAttributeName: [UIFont italicSystemFontOfSize:14]}]];
+    [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \n", self.movie.plot]
+                                                                             attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}]];
+    self.content.attributedText = attributedString;
     NSLog(@"updated");
 }
 

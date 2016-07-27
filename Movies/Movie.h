@@ -15,7 +15,7 @@
 
 @interface Movie : NSObject
 @property(strong, nonatomic) NSString *title;
-@property(strong, nonatomic) NSArray *actors;
+@property(strong, nonatomic) NSString *actors;
 @property(strong, nonatomic) NSString *plot;
 @property(weak, nonatomic) id<MovieDelegate> delegate;
 - (void)searchMovie:(NSString*)movie;
