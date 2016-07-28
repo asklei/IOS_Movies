@@ -24,25 +24,12 @@
             self.title = json[@"Title"];
             self.actors = json[@"Actors"];
             self.plot = json[@"Plot"];
-            [self downloadMoviePoster:json[@"Poster"]];
+            self.posterURL = json[@"Poster"];
             [self.delegate updated];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [self.delegate receivedError:error.localizedDescription];
     }];
-}
-
--(void)downloadMoviePoster:(NSString *)posterURL {
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:posterURL]]];
-    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id data) {
-        NSLog(@"Image Response: %@", data);
-        [self.delegate receivedPosterImage:data];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Image error: %@", error);
-        [self.delegate receivedError:error.localizedDescription];
-    }];
-    [requestOperation start];
 }
 @end

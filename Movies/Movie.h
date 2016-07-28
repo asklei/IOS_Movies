@@ -20,7 +20,7 @@
 @property(strong, nonatomic) NSString *title;
 @property(strong, nonatomic) NSString *actors;
 @property(strong, nonatomic) NSString *plot;
+@property (strong, nonatomic) NSString *posterURL;
 @property(weak, nonatomic) id<MovieDelegate> delegate;
 - (void)searchMovie:(NSString*)movie;
--(void)downloadMoviePoster:(NSString *)posterURL;
 @end

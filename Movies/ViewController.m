@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Masonry.h"
 #import "Movie.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ViewController ()
 @property (nonatomic, weak) UIActivityIndicatorView *activityIndicatorView;
@@ -108,6 +109,8 @@
     [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \n", self.movie.plot]
                                                                              attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}]];
     self.content.attributedText = attributedString;
+    [self.image setImageWithURL:[NSURL URLWithString:self.movie.posterURL]];
+    [self.activityIndicatorView stopAnimating];
     NSLog(@"updated");
 }
 
