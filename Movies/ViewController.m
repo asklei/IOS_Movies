@@ -118,6 +118,7 @@
 
 - (void)receivedError:(NSString *)errorMessage {
     self.content.text = errorMessage;
+    [self.image setImage:nil];
     [self.activityIndicatorView stopAnimating];
 }
 
