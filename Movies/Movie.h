@@ -13,6 +13,7 @@
 @optional
 -(void) updated;
 -(void)receivedPosterImage:(UIImage *)posterImage;
+-(void)receivedError:(NSString *)errorMessage;
 @end
 
 @interface Movie : NSObject

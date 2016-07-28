@@ -111,8 +111,13 @@
     NSLog(@"updated");
 }
 
--(void)receivedPosterImage:(UIImage *)posterImage {
+- (void)receivedPosterImage:(UIImage *)posterImage {
     [self.image setImage:posterImage];
+    [self.activityIndicatorView stopAnimating];
+}
+
+- (void)receivedError:(NSString *)errorMessage {
+    self.content.text = errorMessage;
     [self.activityIndicatorView stopAnimating];
 }
 
