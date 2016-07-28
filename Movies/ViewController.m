@@ -11,6 +11,7 @@
 #import "Movie.h"
 
 @interface ViewController ()
+@property (nonatomic, weak) UIActivityIndicatorView *activityIndicatorView;
 @property(nonatomic, weak) UISearchBar *search;
 @property(nonatomic, weak) UITextView *content;
 @property(nonatomic, weak) UIImageView *image;
@@ -23,15 +24,18 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIActivityIndicatorView *activityIndicatorView = [UIActivityIndicatorView new];
     UISearchBar *search = [UISearchBar new];
     UITextView *content = [UITextView new];
     UIImageView *image = [UIImageView new];
+    self.activityIndicatorView = activityIndicatorView;
     self.search = search;
     self.content = content;
     self.image = image;
     [self.view addSubview:search];
     [self.view addSubview:content];
     [self.view addSubview:image];
+    [self.view addSubview:activityIndicatorView];
     
     search.placeholder = @"search";
     search.searchBarStyle = UISearchBarStyleMinimal;
@@ -40,6 +44,8 @@
     content.layer.cornerRadius = 5.0f;
     content.layer.borderWidth = 0.5f;
     image.layer.cornerRadius = 5.0f;
+    //Customize activity indicator view
+    self.activityIndicatorView.color = [UIColor grayColor];
     
     self.search.delegate = self;
     self.movie = [Movie new];
@@ -67,6 +73,10 @@
         make.bottom.equalTo(self.view.mas_bottom).offset(-spaceD*2);
     }];
     
+    [self.activityIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+    }];
+    
     [self.content sizeToFit];
     [self.image sizeToFit];
     
@@ -83,6 +93,7 @@
 
 # pragma mark: UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.activityIndicatorView startAnimating];
     [searchBar resignFirstResponder];
     [self.movie searchMovie:searchBar.text];
 }
@@ -102,6 +113,7 @@
 
 -(void)receivedPosterImage:(UIImage *)posterImage {
     [self.image setImage:posterImage];
+    [self.activityIndicatorView stopAnimating];
 }
 
 @end
